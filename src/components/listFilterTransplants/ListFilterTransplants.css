@@ -1,0 +1,15 @@
+/*.dashBord{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F3F7FA;
+    
+}
+*/
+.listFilterTransplants{
+    display: flex;
+    flex-direction: column;
+    /*padding-left: 10px;*/
+    padding-bottom: 10px;
+    cursor: url("../../images/cursorHand.png"), pointer;
+}

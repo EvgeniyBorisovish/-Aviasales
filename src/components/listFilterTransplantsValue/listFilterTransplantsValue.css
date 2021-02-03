@@ -1,0 +1,23 @@
+/*.dashBord{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F3F7FA;
+    
+}
+*/
+.listFilterTransplantsValue{
+    display: flex;
+    padding: 10px 0;
+    justify-content: flex-start;
+    user-select: none; 
+}
+.listFilterTransplantsValue:hover{
+    background-color: #F1FCFF;
+}
+.listFilterTransplantsValue__text-value{
+    padding-left: 10px;
+}
+.listFilterTransplantsValue__checkBox{
+    padding-left: 30px;
+}

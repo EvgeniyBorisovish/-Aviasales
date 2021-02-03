@@ -1,0 +1,24 @@
+.btnShowMoreTickets{
+    margin-top: 20px;
+    background: #2196F3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 15px 20px;
+    cursor: url("../../images/cursorHand.png"), pointer;
+    
+}
+
+.btnShowMoreTickets__header{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+

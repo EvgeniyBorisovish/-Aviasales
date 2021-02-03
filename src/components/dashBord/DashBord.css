@@ -1,0 +1,20 @@
+/*.dashBord{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F3F7FA;
+    
+}
+*/
+.dashBord{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: #E5E5E5;
+  }

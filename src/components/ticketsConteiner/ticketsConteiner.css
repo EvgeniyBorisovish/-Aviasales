@@ -1,0 +1,6 @@
+.ticketsConteiner{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 502px;
+    flex-grow: 1;
+}

@@ -6,7 +6,7 @@ import {TOGGLE_FILTER_TICKETS} from '../../constants/actions'
 
 export const ListFilterTicketsValue = ({name,value})=>{
 
-const  filterObj =  useSelector((state) => state.filterTickets[name]);//initialListTickets
+const  filterObj =  useSelector((state) => state.sortTickets[name]);//initialListTickets
 const  countListTickets =  useSelector((state) => state.initialListTickets.list.length);//
 
 

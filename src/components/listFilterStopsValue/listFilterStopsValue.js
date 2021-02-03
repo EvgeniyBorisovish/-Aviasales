@@ -6,7 +6,7 @@ import checkboxNull from "../../images/checkboxNull.png";
 import {TOGGLE_FILTER_STOPS} from '../../constants/actions'
 import {getCaptionStop} from '../../API/api_getTicketOffer'
 
-export const ListFilterTransplantsValue = ({id})=>{
+export const ListFilterStopsValue = ({id})=>{
 
    const dispath = useDispatch()
 
@@ -15,9 +15,9 @@ export const ListFilterTransplantsValue = ({id})=>{
    const onClickHandler = ()=>{ dispath({type:TOGGLE_FILTER_STOPS,payload:id}) }
 
    return (
-   <div className="listFilterTransplantsValue" onClick={onClickHandler}>
-      <img src={ checkbox?(checkboxFull):(checkboxNull)} className="listFilterTransplantsValue__checkBox" alt={"Чекбокс"}></img>
-      <div className="listFilterTransplantsValue__text-value">{getCaptionStop(id,true)}</div>
+   <div className="listFilterStopsValue" onClick={onClickHandler}>
+      <img src={ checkbox?(checkboxFull):(checkboxNull)} className="listFilterStopsValue__checkBox" alt={"Чекбокс"}></img>
+      <div className="listFilterStopsValue__text-value">{getCaptionStop(id,true)}</div>
    </div>);
    
 }

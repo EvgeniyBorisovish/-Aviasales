@@ -6,8 +6,8 @@ import {formatTimeH_M}  from '../../API/api_ListFilterTickets'
 
 
 
-export const ListFilterTickets = ()=>{
-  const  {minPrice,fastTime,optimal} =  useSelector((state) => state.filterTickets);
+export const ListSortTickets = ()=>{
+  const  {minPrice,fastTime,optimal} =  useSelector((state) => state.sortTickets);
   
   return(
    <div className="listFilterTickets">

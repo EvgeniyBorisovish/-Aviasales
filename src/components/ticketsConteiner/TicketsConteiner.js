@@ -1,6 +1,6 @@
 
 import React from "react";
-import  ListFilterTickets  from "../listFilterTickets";
+import  ListFilterTickets  from "../listSortTickets";
 import  ListTickets  from "../listTickets";
 export const TicketsConteiner = ()=>{
 

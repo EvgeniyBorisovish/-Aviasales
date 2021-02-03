@@ -24,7 +24,7 @@ import {  ADD_PACK_INITIAL_LIST,
    START_FILL_INITIAL_LIST,
    STOP_FILL_INITIAL_LIST,
    LOAD_FILTERED_LIST_TICKETS ,
-   ADD_FILTERS_TICKETS,
+   ADD_SORTS_TICKETS,
    ADD_ERROR_MESSAGE,
    CLEAR_ERROR_MESSAGE,
    TOGGLE_FILTER_TICKETS,
@@ -40,7 +40,7 @@ import axios from "axios";
 
 async function  getData(URL_GET_LIST_TICKETS,searchId){
   console.log("searchId",searchId)
-  let response =await axios(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`);
+  let response =await axios(`${URL_GET_LIST_TICKETS}?searchId=${searchId}`);
   //let response =await axios(`https://front-test.beta.aviasales.ru/tickets?searchId=27vfi`);
   //console.log(response)
   return response
@@ -65,28 +65,23 @@ function* fillInitialList() {
             if (Number(response.status) === 502) {
               continue
             } else if (Number(response.status) !== 200) {
-                yield delay(1000)//new Promise(resolve => setTimeout(resolve, 1000));
+                yield delay(1000)
               continue
             } else {
               const new_data = yield response.data;
 
               yield put({ type: ADD_PACK_INITIAL_LIST, payload: new_data.tickets});
-              //console.log(new_data.tickets)
-              
+                            
               let initialListTickets = [...yield select((state) => state.initialListTickets.list)];
-
               
-               const {minPrice,fastTime,optimal} = get_SortParams( initialListTickets )            
+              const {minPrice,fastTime,optimal} = get_SortParams( initialListTickets )            
 
-              
-
-              yield put({ type: ADD_FILTERS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
+              yield put({ type: ADD_SORTS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
 
               const  filteredListTickets = yield select((state) => state.initialListTickets.list)
-              yield put({ type: LOAD_FILTERED_LIST_TICKETS,payload:filteredListTickets});
-               
-              
 
+              yield put({ type: LOAD_FILTERED_LIST_TICKETS,payload:filteredListTickets});
+              
               const arr_stops = Array.from( new Set( filteredListTickets.reduce( ( stopsAll , element )=>{
                       stopsAll = [...stopsAll,...element.segments.reduce((stops,elem)=>{stops.push(elem.stops.length); return stops},[])]  
                       return stopsAll
@@ -94,21 +89,15 @@ function* fillInitialList() {
                     )
                   )
               )
-              //console.log("arr_stops",arr_stops)
-
+              
               yield put({ type: ADD_FILTER_STOPS,payload:arr_stops})
-
               
              
               if (new_data.stop===true){ 
 
-                console.log(STOP_FILL_INITIAL_LIST)
                 yield put({ type: STOP_FILL_INITIAL_LIST});
-                yield put({ type: INITIAL_LIMIT_TICKETS})
-                //const  filteredListTickets = yield select((state) => state.initialListTickets.list)
-                //yield put({ type: LOAD_FILTERED_LIST_TICKETS,payload:filteredListTickets});
 
-                
+                yield put({ type: INITIAL_LIMIT_TICKETS})
 
                 break
               }
@@ -120,11 +109,9 @@ function* fillInitialList() {
           yield delay(1000) 
           yield put({ type: CLEAR_ERROR_MESSAGE}); 
 
-          console.log(STOP_FILL_INITIAL_LIST)
           yield put({ type: STOP_FILL_INITIAL_LIST});
           yield put({ type: INITIAL_LIMIT_TICKETS})
-          //const  filteredListTickets = yield select((state) => state.initialListTickets.list)
-          //yield put({ type: LOAD_FILTERED_LIST_TICKETS,payload:filteredListTickets});
+          
           break
         }
         
@@ -171,34 +158,26 @@ function* filterStops_data_work() {
 
 const stops_obj = yield select((state) => state.filterStops.stops_obj)
 
-
-
-
 const activeStopsArr =  Object.keys(stops_obj).reduce((stops,id_stop)=>{
 
-  if (stops_obj[id_stop]){
- 
-     console.log("id_stop",id_stop)
- 
-     stops.push(Number(id_stop))
- }
+  if (stops_obj[id_stop]){ stops.push(Number(id_stop)) }
   return stops
+
  },[])
 
  const filteredListTickets = [...yield select((state) => state.initialListTickets.list)]
 
 if (activeStopsArr.length===0){
+
   yield put( { type:LOAD_FILTERED_LIST_TICKETS , payload:filteredListTickets } )  
   
   const {minPrice,fastTime,optimal} = get_SortParams( filteredListTickets )            
 
-  yield put({ type: ADD_FILTERS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
+  yield put({ type: ADD_SORTS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
+
   return
+
 }
-
-
-
-
 
 const filteredListTickets_ = filteredListTickets.filter(element=>{
 
@@ -208,26 +187,19 @@ const filteredListTickets_ = filteredListTickets.filter(element=>{
           },0)
           )
   }
+
   )
 
   yield put( { type:LOAD_FILTERED_LIST_TICKETS , payload:filteredListTickets_ } )  
 
-
   const {minPrice,fastTime,optimal} = get_SortParams( filteredListTickets_ )            
 
-  yield put({ type: ADD_FILTERS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
-
+  yield put({ type: ADD_SORTS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
 
 }
-
-
-
 
 function* mySaga() {
   yield all([fetch_data(),filterTickets_data(),filterStops_data()]);
 }
 
 export default mySaga;
-
-
-

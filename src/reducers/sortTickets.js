@@ -1,15 +1,15 @@
-import {ADD_FILTERS_TICKETS,TOGGLE_FILTER_TICKETS} from '../constants/actions'
+import {ADD_SORTS_TICKETS,TOGGLE_FILTER_TICKETS} from '../constants/actions'
 
 const initialState = {
     minPrice:{active:false,text:"Самый дешевый",value:""},
     fastTime:{active:false,text:"Самый быстрый",value:""},
     optimal:{active:false,text:"Оптимальный",value:{price:"",time:""}},
 }
-//
-export const filterTickets = (state = initialState,action)=> {
-//{ minPrice, fastTime ,optimal:{price:opt_price,time:opt_duration}}
+
+export const sortTickets = (state = initialState,action)=> {
+
   switch (action.type) {
-       case ADD_FILTERS_TICKETS:
+       case ADD_SORTS_TICKETS:
          console.log(action.payload)
         return {
             ...state,

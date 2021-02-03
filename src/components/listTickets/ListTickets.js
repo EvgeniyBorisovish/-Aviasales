@@ -1,13 +1,11 @@
 
 import React from "react";
+import { useSelector } from 'react-redux';
 import TicketOffer from '../ticketOffer'
 import BtnShowMoreTickets from '../btnShowMoreTickets'
 
-import { useSelector } from 'react-redux';
-
 export const ListTickets = ()=>{
 
-// const  listTickets =  [...useSelector((state) => state.initialListTickets.list)].slice(0,4);  
 const countLimitTickets = useSelector((state) => state.countLimitTickets.count)
 
 const  listTickets =  [...useSelector((state) => state.filteredListTickets.list)].slice(0,countLimitTickets);  

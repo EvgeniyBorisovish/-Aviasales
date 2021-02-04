@@ -1,3 +1,10 @@
+import axios from 'axios'
+export async function  getData(URL_GET_LIST_TICKETS,searchId){
+    console.log("searchId",searchId)
+    let response =await axios(`${URL_GET_LIST_TICKETS}?searchId=${searchId}`);
+    return response
+  }
+
 export function  get_SortParams(listTickets) {
     listTickets.forEach((element)=>{
         element.duration = element.segments.reduce((accum,element)=>(accum+element.duration),0)

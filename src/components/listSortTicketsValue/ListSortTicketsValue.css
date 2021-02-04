@@ -1,4 +1,4 @@
-.listFilterTicketsValue{
+.listSortTicketsValue{
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -16,18 +16,18 @@ border-bottom: 1px solid #DFE5EC;
 flex-grow: 1;
 }
 
-.listFilterTicketsValue:last-child{
+.listSortTicketsValue:last-child{
     border-top-right-radius:4px;
     border-bottom-right-radius:4px;
 }
-.listFilterTicketsValue:first-child{
+.listSortTicketsValue:first-child{
     border-top-left-radius:4px;
     border-bottom-left-radius:4px;
 }
 
 
 
-.listFilterTicketsValue--cheked{
+.listSortTicketsValue--cheked{
     background: #2196F3;
     border: 1px solid #000000;
     color: #FFFFFF;

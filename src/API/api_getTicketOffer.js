@@ -16,12 +16,12 @@ export function getStartStopTime(dateString,minutes){
     duration = Number(duration)
     const hours = Math.trunc(duration/60)===0?"":(`${Math.trunc(duration/60)}ч `)
     let minutes = duration - Math.trunc(duration/60)*60
-    minutes = minutes===0?"":(`${minutes}м`)
+    minutes = minutes===0?"":(`${String(minutes).padStart(2,"0")}м`)
     return (`${hours}${minutes}`)
   }
   
   export function getCaptionStop(countStops,filterStops=false){
-    
+
     countStops = Number(countStops)
 
     if (countStops===0 && filterStops===true){return "без пересадок"}

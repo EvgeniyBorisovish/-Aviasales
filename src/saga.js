@@ -1,25 +1,6 @@
-/*
-0:
-carrier: "FV"
-price: 15028
-segments: Array(2)
-0:
-date: "2021-02-11T02:25:00.000Z"
-destination: "HKT"
-duration: 892
-origin: "MOW"
-stops: (2) ["AUH", "IST"]
-__proto__: Object
-1:
-date: "2021-03-03T01:59:00.000Z"
-destination: "MOW"
-duration: 1157
-origin: "HKT"
-stops: (2) ["KUL", "DXB"]
-*/
-
+import axios from "axios";
 import { put, takeLatest, delay,select, all } from "redux-saga/effects";//,take, select
-import {get_SortParams} from './API/api_saga'
+import {get_SortParams,getData} from './API/api_saga'
 import {  ADD_PACK_INITIAL_LIST,
    START_FILL_INITIAL_LIST,
    STOP_FILL_INITIAL_LIST,
@@ -35,16 +16,10 @@ import {  ADD_PACK_INITIAL_LIST,
   } from "./constants/actions";
 
 import {URL_GET_ID,URL_GET_LIST_TICKETS} from './constants/urls'
-//import {getPackTickets} from './API/api_getTicketsData'
-import axios from "axios";
 
-async function  getData(URL_GET_LIST_TICKETS,searchId){
-  console.log("searchId",searchId)
-  let response =await axios(`${URL_GET_LIST_TICKETS}?searchId=${searchId}`);
-  //let response =await axios(`https://front-test.beta.aviasales.ru/tickets?searchId=27vfi`);
-  //console.log(response)
-  return response
-}
+
+
+
 function* fillInitialList() {
   try {
     const resonse =  yield axios.get(URL_GET_ID)
@@ -143,14 +118,7 @@ function* filterTickets_data() {
 }
 
 function* filterStops_data() {
-
-  
   yield takeLatest(TOGGLE_FILTER_STOPS, filterStops_data_work);
-
-
-  
-
-
 }
 
 

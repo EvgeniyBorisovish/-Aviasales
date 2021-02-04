@@ -13,7 +13,7 @@ const  listTickets =  [...useSelector((state) => state.filteredListTickets.list)
    return (
    <div className="listTickets">
      {
-       listTickets.map((ticket,index)=>(<TicketOffer ticket={ticket} first={index===0,true,false} key={index}/>))
+       listTickets.map((ticket,index)=>(<TicketOffer ticket={ticket} first={index===0?true:false} key={index}/>))
      }
       <BtnShowMoreTickets/>
    </div>);

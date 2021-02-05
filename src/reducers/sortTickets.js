@@ -10,7 +10,7 @@ export const sortTickets = (state = initialState,action)=> {
 
   switch (action.type) {
        case ADD_SORTS_TICKETS:
-         console.log(action.payload)
+         
         return {
             ...state,
             minPrice:{...state.minPrice,active:true,value:action.payload.minPrice},

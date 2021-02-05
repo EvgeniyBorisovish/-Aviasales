@@ -2,9 +2,10 @@
 import React from "react";
 import {getStartStopTime,getDurationString,getCaptionStop}  from '../../API/api_getTicketOffer'
 import {URL_PICT_AIR_COMPANY} from '../../constants/urls'
+
 export const TicketOffer = ({ticket,first})=>{
 
-  const {carrier,price,segments} = ticket
+const {carrier,price,segments} = ticket
 
    return (
    <div className="ticketOffer">

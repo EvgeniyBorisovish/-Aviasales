@@ -21,7 +21,9 @@ import {URL_GET_ID,URL_GET_LIST_TICKETS} from './constants/urls'
 
 
 function* fillInitialList() {
+  
   try {
+   
     const resonse =  yield axios.get(URL_GET_ID)
     const searchId = resonse.data.searchId
     

@@ -13,8 +13,8 @@ export function sortFilteredListTickets(list,type_sort){
 
             sortList.forEach((element)=>{
                 element.duration = element.segments.reduce((accum,element)=>(accum+element.duration),0)
-              })//.sort((a,b)=>(a.duration-b.duration));
-              console.log("sortList",sortList)
+              })
+              
            return sortList.sort((a,b)=>(a.duration-b.duration));
 
         case "optimal": 

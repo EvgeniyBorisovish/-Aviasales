@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import TicketOffer from '../ticketOffer'
 import BtnShowMoreTickets from '../btnShowMoreTickets'
 
+const Row_memo = React.memo(TicketOffer)
+
 export const ListTickets = ()=>{
 
 const countLimitTickets = useSelector((state) => state.countLimitTickets.count)

@@ -19,7 +19,7 @@ export const filterStops = (state = initialState,action)=> {
           };
          
         case TOGGLE_FILTER_STOPS:
-          
+               
           return {
             stops_ids:state.stops_ids,
             stops_obj:{...state.stops_obj,[action.payload]:!state.stops_obj[action.payload]}

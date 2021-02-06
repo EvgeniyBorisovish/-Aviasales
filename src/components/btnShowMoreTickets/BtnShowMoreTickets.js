@@ -10,11 +10,13 @@ export const BtnShowMoreTickets = ()=>{
   const onClickHandler = ()=>{ dispath({type:ADD_COUNT_LIMIT_TICKETS}) }
 
   const  countTickets =  useSelector((state) => state.filteredListTickets.list.length)
-
+    
    return (
     <>
         {countTickets>0 &&
-          (<div className="btnShowMoreTickets" onClick={onClickHandler}><div className="btnShowMoreTickets__header" >Показать еще 5 билетов</div></div>)
+          (<div className="btnShowMoreTickets" onClick={onClickHandler}>
+            <div className="btnShowMoreTickets__header" >{`Показать еще 5 из ${countTickets} билетов`}</div>
+          </div>)
         }
     </>)
   

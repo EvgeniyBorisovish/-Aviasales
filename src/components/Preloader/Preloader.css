@@ -15,7 +15,6 @@
     animation-name: preloaderTransformAnimation;
     border: 1px solid #2196F3;
     border-radius: 50%;
-    border-right-color: #FFFFFF;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;

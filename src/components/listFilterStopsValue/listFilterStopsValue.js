@@ -3,8 +3,7 @@ import React from "react";
 import {useSelector,useDispatch} from 'react-redux'
 import checkboxFull from "../../images/checkboxFull.png";
 import checkboxNull from "../../images/checkboxNull.png";
-import img_preloader from "../../images/preloader_ring.png"
-import {TOGGLE_FILTER_STOPS} from '../../constants/actions'
+import {TOGGLE_SORTS_TICKETS} from '../../constants/actions'
 import {getCaptionStop} from '../../API/api_getTicketOffer'
 
 export const ListFilterStopsValue = ({id})=>{
@@ -15,7 +14,7 @@ export const ListFilterStopsValue = ({id})=>{
 
    const checkbox = useSelector((state)=>state.filterStops.stops_obj[id])
    
-   const onClickHandler = ()=>{ dispath({type:TOGGLE_FILTER_STOPS,payload:id}) }
+   const onClickHandler = ()=>{ dispath({type:TOGGLE_SORTS_TICKETS,payload:id}) }
 
    return (
          <div className="listFilterStopsValue" onClick={onClickHandler}>

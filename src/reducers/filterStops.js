@@ -1,4 +1,4 @@
-import {ADD_FILTER_STOPS,TOGGLE_FILTER_STOPS} from '../constants/actions'
+import {ADD_FILTER_STOPS,TOGGLE_FILTER_STOPS,CLEAR_FILTER_STOPS} from '../constants/actions'
 //id свойства поля это количество пересадок а значение Boolean Используемость {0:false,1:true,3:true} 
 const initialState = {
   stops_ids:[],
@@ -24,6 +24,13 @@ export const filterStops = (state = initialState,action)=> {
             stops_ids:state.stops_ids,
             stops_obj:{...state.stops_obj,[action.payload]:!state.stops_obj[action.payload]}
           };
+
+          case CLEAR_FILTER_STOPS:
+          
+            return {
+              ...initialState
+            };
+          
 
       default:
           return state;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { put, takeLatest, delay,select, all } from "redux-saga/effects";//,take, select
+import { put,call, takeLatest, delay,select, all } from "redux-saga/effects";//,take, select
 import {get_SortParams,getData} from './API/api_saga'
 import {  ADD_PACK_INITIAL_LIST,
    START_FILL_INITIAL_LIST,
@@ -7,18 +7,26 @@ import {  ADD_PACK_INITIAL_LIST,
    LOAD_FILTERED_LIST_TICKETS ,
    ADD_SORTS_TICKETS,
    ADD_ERROR_MESSAGE,
-   CLEAR_ERROR_MESSAGE,
-   TOGGLE_FILTER_TICKETS,
+   TOGGLE_SORTS_TICKETS,
    SORT_FILTERED_LIST_TICKETS,
-   INITIAL_LIMIT_TICKETS,
    ADD_FILTER_STOPS,
-   TOGGLE_FILTER_STOPS
+   TOGGLE_FILTER_STOPS,
+   INITIAL_LIMIT_TICKETS
+   
   } from "./constants/actions";
 
 import {URL_GET_ID,URL_GET_LIST_TICKETS} from './constants/urls'
 
 
+function* clearAll_State() {
 
+const actions_arr =   "CLEAR_FILTER_STOPS,CLEAR_SORTS_TICKETS,CLEAR_INITIAL_LIST,CLEAR_ERROR_MESSAGE,INITIAL_LIMIT_TICKETS,CLEAR_FILTERED_LIST_TICKETS".split(",")
+
+for (let i=0;i<actions_arr.length;++i){
+  yield put({type:actions_arr[i]})
+}
+  
+}
 
 function* fillInitialList() {
   
@@ -30,10 +38,14 @@ function* fillInitialList() {
     if (searchId===undefined || searchId===null || searchId===""){
       yield put({ type: ADD_ERROR_MESSAGE, payload: "Некорекктный id для получения данных, попробуйте еще раз" }); 
       console.log("Некорекктный id для получения данных, попробуйте еще раз")
-      yield delay(2000) 
-      yield put({ type: CLEAR_ERROR_MESSAGE}); 
+      
+     // yield put({ type: CLEAR_ERROR_MESSAGE}); 
       return
     }
+
+    yield call(clearAll_State)
+    yield delay(2000)
+
     while(true){
         try{
 
@@ -45,46 +57,46 @@ function* fillInitialList() {
                 yield delay(1000)
               continue
             } else {
-              const new_data = yield response.data;
+                  const new_data = yield response.data;
 
-              yield put({ type: ADD_PACK_INITIAL_LIST, payload: new_data.tickets});
-                            
-              let initialListTickets = [...yield select((state) => state.initialListTickets.list)];
-              
-              const {minPrice,fastTime,optimal} = get_SortParams( initialListTickets )            
+                  yield put({ type: ADD_PACK_INITIAL_LIST, payload: new_data.tickets});
+                                
+                  let initialListTickets = [...yield select((state) => state.initialListTickets.list)];
+                  
+                  const {minPrice,fastTime,optimal} = get_SortParams( initialListTickets )            
 
-              yield put({ type: ADD_SORTS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
+                  yield put({ type: ADD_SORTS_TICKETS, payload: { minPrice, fastTime ,optimal:{price:optimal.price,time:optimal.duration}}});
 
-              const  filteredListTickets = yield select((state) => state.initialListTickets.list)
+                  const  filteredListTickets = yield select((state) => state.initialListTickets.list)
 
-              yield put({ type: LOAD_FILTERED_LIST_TICKETS,payload:filteredListTickets});
-              
-              const arr_stops = Array.from( new Set( filteredListTickets.reduce( ( stopsAll , element )=>{
-                      stopsAll = [...stopsAll,...element.segments.reduce((stops,elem)=>{stops.push(elem.stops.length); return stops},[])]  
-                      return stopsAll
-                    },[]
-                    )
+                  yield put({ type: LOAD_FILTERED_LIST_TICKETS,payload:filteredListTickets});
+                  
+                  const arr_stops = Array.from( new Set( filteredListTickets.reduce( ( stopsAll , element )=>{
+                          stopsAll = [...stopsAll,...element.segments.reduce((stops,elem)=>{stops.push(elem.stops.length); return stops},[])]  
+                          return stopsAll
+                        },[]
+                        )
+                      )
                   )
-              )
-              
-              yield put({ type: ADD_FILTER_STOPS,payload:arr_stops})
-              
-             
-              if (new_data.stop===true){ 
+                  
+                  yield put({ type: ADD_FILTER_STOPS,payload:arr_stops})
+                  
+                
+                  if (new_data.stop===true){ 
 
-                yield put({ type: STOP_FILL_INITIAL_LIST});
+                    yield put({ type: STOP_FILL_INITIAL_LIST});
 
-                yield put({ type: INITIAL_LIMIT_TICKETS})
+                    yield put({ type: INITIAL_LIMIT_TICKETS})
 
-                break
-              }
+                    break
+                  }
             }
         }
         catch (error) {
           yield put({ type: ADD_ERROR_MESSAGE, payload: "ошибка получения списка билетов" }); 
           console.log("ошибка получения списка билетов",error)
           yield delay(1000) 
-          yield put({ type: CLEAR_ERROR_MESSAGE}); 
+         // yield put({ type: CLEAR_ERROR_MESSAGE}); 
 
           yield put({ type: STOP_FILL_INITIAL_LIST});
           yield put({ type: INITIAL_LIMIT_TICKETS})
@@ -98,7 +110,7 @@ function* fillInitialList() {
     yield put({ type: ADD_ERROR_MESSAGE, payload: "ошибка получения id для получения данных" }); 
     console.log("ошибка получения id для получения данных")
     yield delay(2000) 
-    yield put({ type: CLEAR_ERROR_MESSAGE}); 
+    //yield put({ type: CLEAR_ERROR_MESSAGE}); 
   }
 
 
@@ -116,7 +128,7 @@ function* fillfilteredListTickets(action) {
 
 
 function* filterTickets_data() {
-  yield takeLatest(TOGGLE_FILTER_TICKETS, fillfilteredListTickets);
+  yield takeLatest(TOGGLE_SORTS_TICKETS, fillfilteredListTickets);
 }
 
 function* filterStops_data() {

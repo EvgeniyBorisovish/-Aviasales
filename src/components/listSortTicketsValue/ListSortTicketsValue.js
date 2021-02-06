@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux'
-import {TOGGLE_FILTER_TICKETS} from '../../constants/actions'
+import {TOGGLE_SORTS_TICKETS} from '../../constants/actions'
 
 export const ListSortTicketsValue = ({name,value})=>{
 
@@ -13,7 +13,7 @@ const dispath = useDispatch()
 
 const onClickHandler = ()=>{
    if (countListTickets===0){return}
-   dispath({type:TOGGLE_FILTER_TICKETS,payload:name})
+   dispath({type:TOGGLE_SORTS_TICKETS,payload:name})
 }
    return (
       <div className={"listSortTicketsValue" + (filterObj.active?" listSortTicketsValue--cheked":"")} onClick={onClickHandler}>

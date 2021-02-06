@@ -1,4 +1,4 @@
-import {ADD_SORTS_TICKETS,TOGGLE_FILTER_TICKETS} from '../constants/actions'
+import {ADD_SORTS_TICKETS,TOGGLE_SORTS_TICKETS,CLEAR_SORTS_TICKETS} from '../constants/actions'
 
 const initialState = {
     minPrice:{active:false,text:"Самый дешевый",value:""},
@@ -18,7 +18,7 @@ export const sortTickets = (state = initialState,action)=> {
             optimal:{...state.optimal,active:false,value:{price:action.payload.optimal.price,time:action.payload.optimal.time}},
         };
         
-        case TOGGLE_FILTER_TICKETS:
+        case TOGGLE_SORTS_TICKETS:
           
               return{
               ...Object.keys(state).reduce((new_state,id_filter)=>{ 
@@ -30,7 +30,14 @@ export const sortTickets = (state = initialState,action)=> {
                   return new_state
                },{})
               }
-              
+
+         case CLEAR_SORTS_TICKETS:
+
+         return{...initialState
+           
+         }
+
+                    
 
       default:
         return state;

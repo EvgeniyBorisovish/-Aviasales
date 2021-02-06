@@ -1,4 +1,4 @@
-import {START_FILL_INITIAL_LIST,ADD_PACK_INITIAL_LIST,STOP_FILL_INITIAL_LIST} from '../constants/actions'
+import {START_FILL_INITIAL_LIST,ADD_PACK_INITIAL_LIST,STOP_FILL_INITIAL_LIST,CLEAR_INITIAL_LIST} from '../constants/actions'
 
 const initialState = {
   list:[],
@@ -25,8 +25,13 @@ export const initialListTickets = (state = initialState,action)=> {
         return {
           ...state,
           loading:false
-        };  
-     
+        }; 
+        
+      case CLEAR_INITIAL_LIST:
+        return {
+          ...initialState
+        } 
+        
       default:
           return state;
   }

@@ -1,6 +1,8 @@
 
-export function Preloader() {
+export function Preloader({borderRightColor}) {
 
-    return <div className="listFilterStops__preloader" style={{borderRightColor: "#F3F7FA"}}></div>//#FFFFFF
+    return <div className="listFilterStops__preloader" style={{borderRightColor: borderRightColor}}></div>//
     //
  }
+
+ 

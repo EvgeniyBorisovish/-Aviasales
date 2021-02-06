@@ -11,7 +11,7 @@ export const ListFilterStops = ()=>{
    <div className={stops_ids.length>0?"listFilterStops":"listFilterStops preloderVisible"}>
       {
          stops_ids.length===0 &&
-         <Preloader borderRightColor={"#FFFFFF"} />}
+         <Preloader borderRightColor={"#FFFFFF"}/>}
       {
          stops_ids.map((id)=><ListFilterStopsValue id={id} key={id}/>)
       }

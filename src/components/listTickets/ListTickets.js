@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import TicketOffer from '../ticketOffer'
 import BtnShowMoreTickets from '../btnShowMoreTickets'
 import Preloader from '../Preloader'
-const Row_memo = React.memo(TicketOffer)
+
 
 export const ListTickets = ()=>{
 

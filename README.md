@@ -12,7 +12,7 @@
 Репозиторий тестового задния находится по адресу: https://github.com/KosyanMedia/test-tasks/tree/master/aviasales_frontend
 
 
-![Иллюстрация к проекту]()
+![Иллюстрация к проекту](https://github.com/EvgeniyBorisovish/-Aviasales/blob/main/ImageApplication.png)
 
 
 Демо приложения доступно по ссылке http://aviasales-git-main.evgeniyborisovish.vercel.app/

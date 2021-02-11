@@ -1,3 +1,6 @@
+Демо приложения доступно по ссылке http://aviasales-git-main.evgeniyborisovish.vercel.app/
+
+
 Тестовое задание Aviasales (frontend)
 Основной frontend проект нашей команды — это страница выдачи билетов со множеством фильтров, настроек и, собственно, билетов. Проект написан на React, поэтому тестовое задание приближено к ежедневным задачам.
 
@@ -15,4 +18,4 @@
 ![Иллюстрация к проекту](https://github.com/EvgeniyBorisovish/-Aviasales/blob/main/ImageApplication.png)
 
 
-Демо приложения доступно по ссылке http://aviasales-git-main.evgeniyborisovish.vercel.app/
+
